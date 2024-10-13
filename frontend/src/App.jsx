@@ -3,6 +3,7 @@ import axios from "axios"
 import Memo1 from "../src/assingment/week-6/use-memo/Memo1";
 import Memo2 from '../src/assingment/week-6/use-memo/Memo2';
 import Callback1 from '../src/assingment/week-6/use-callback/Callback1';
+import Useref1 from '../src/assingment/week-6/useref/Useref1';
 
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
 
   return (
     <>
-   <Callback1/>
+   {/* <Callback1/> */}
+   <Useref1/>
     </>
   )
 }
