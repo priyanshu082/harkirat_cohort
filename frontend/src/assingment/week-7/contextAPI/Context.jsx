@@ -1,8 +1,9 @@
-import React, { lazy, Suspense, useContext, useState } from 'react'
-import { CountContext } from './assingment/week-7/contextAPI/Context';
+import React from 'react'
+import { createContext } from 'react'
 
+const CountContext=createContext(0); 
 
-function App() {
+function Context() {
 
 const [count , setCount]=useState(0);
 
@@ -44,4 +45,4 @@ const Buttons =({setCount})=>{
 
 
 
-export default App
+export default Context
