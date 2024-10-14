@@ -24,7 +24,7 @@ const Memo2 = () => {
    
   return (
     <div>
-         {filterSentence?.length} <br/>
+         {filterSentence?.length}
         <input type='string' onChange={(e)=>setFilter(e.target.value)}/>
         {filterSentence.map((sentence)=>{
             return <p key={Math.random()}>{sentence}</p>
