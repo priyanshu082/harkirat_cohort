@@ -20,4 +20,3 @@ greet({
     lastname: "singh",
     age: 24
 });
-// INterface can be implemented as classes but types cannot be implemented as classes

@@ -32,3 +32,17 @@ greet({
 
 
 // INterface can be implemented as classes but types cannot be implemented as classes
+
+//some more examples of interface with classes ectendeed
+
+interface Animal{
+    name:string,
+    age:number
+    speak:()=>void,
+}
+
+interface Mammal extends Animal {
+    breed:string 
+    //it extended name age speak with breed
+}
+

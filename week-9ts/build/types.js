@@ -5,4 +5,7 @@ function greet2(id) {
 }
 greet2("hell");
 greet2(434);
-greet2(true);
+const t = {
+    name: "john",
+    age: 25
+};
