@@ -9,6 +9,12 @@ enum direction{
     down, //1
     left, //2
     right //3
+    //we can also change there values 
+    // like
+    // up="up",
+    // down="down",
+    // left="left",
+    // right="right"
 }
 function doSomething(key:direction){
     console.log(key)
@@ -18,3 +24,10 @@ function doSomething(key:direction){
 doSomething(direction.up)
 doSomething(direction.down)
 doSomething(direction.left)
+
+//genrally used in fixing status code 
+enum statusCode{
+    SUCCESS=200,
+    NOTFOUND=401,
+    ERROR=500
+}
