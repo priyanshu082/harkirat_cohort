@@ -15,9 +15,10 @@ const main = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield client.post.create({
             data: {
-                title: "HEllo world",
+                title: "priyanshu post",
                 content: "asacjndcjkjjjvjvbhjfbvbfhvbhfsvbasdhbvhsbvhbshdfvbhdsbvhbsdhvbsdhv",
                 authorId: id,
+                published: true,
             }
         });
         console.log("Post created");
@@ -26,4 +27,4 @@ const main = (id) => __awaiter(void 0, void 0, void 0, function* () {
         console.log("error while posting data", error);
     }
 });
-main(1);
+main(2);

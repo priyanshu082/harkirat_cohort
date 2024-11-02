@@ -11,14 +11,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield prisma.user.create({
-            data: {
-                email: "priyanshusingh216@gmail.com",
-                name: "Priyanshu Singh"
+const main = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let res = yield prisma.user.findMany({
+            where: {
+                email: {
+                    endsWith: 'gmail.com'
+                },
+                posts: {
+                    some: {
+                        published: true,
+                    }
+                }
+            },
+            include: {
+                posts: {
+                    where: {
+                        published: true
+                    }
+                }
             }
         });
-    });
-}
+        console.log(res);
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
 main();

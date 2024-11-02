@@ -6,9 +6,10 @@ const main=async (id:number)=>{
     try {
         await client.post.create({
             data:{
-                title:"HEllo world",
+                title:"priyanshu post",
                 content:"asacjndcjkjjjvjvbhjfbvbfhvbhfsvbasdhbvhsbvhbshdfvbhdsbvhbsdhvbsdhv",
                 authorId:id,
+                published:true,
             }
         })
 
@@ -18,4 +19,4 @@ const main=async (id:number)=>{
     }
 }
 
-main(1)
+main(2)
