@@ -29,7 +29,7 @@ async function getTodoData(id:number){
     } finally{
         pool.end();
     }
-    
+     
 }
     
 
