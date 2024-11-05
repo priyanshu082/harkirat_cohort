@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "main": "typescript.js",
   "scripts": {
-    "build":"tsc -b",
+    "build": "tsc -b",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "express": "^4.21.1",
+    "zod": "^3.23.8"
+  }
 }
