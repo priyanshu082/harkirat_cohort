@@ -1,0 +1,13 @@
+{
+  "name": "WEEK-9-TS",
+  "version": "1.0.0",
+  "main": "typescript.js",
+  "scripts": {
+    "build":"tsc -b",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
