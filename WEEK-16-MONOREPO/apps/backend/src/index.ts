@@ -1,4 +1,5 @@
 import express from "express";
+import {PORT} from "@repo/common/config"
 
 const app = express();
 
@@ -8,7 +9,7 @@ app.get("/",(req,res)=>{
     })
 })
 
-const PORT=3002
+// const PORT=300
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`)

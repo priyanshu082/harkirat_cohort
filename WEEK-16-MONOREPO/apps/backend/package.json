@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -b",
-    "dev":"tsc -b && nodemon dist/index.js"
+    "dev":"esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js && nodemon dist/index.js"
   },
   "keywords": [],
   "author": "",
