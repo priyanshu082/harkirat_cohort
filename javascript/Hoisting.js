@@ -36,5 +36,3 @@ var getname = () => {
     - console.log(x) prints undefined because x is hoisted but not yet assigned.
     - console.log(getname) prints undefined for the same reason.
 */
-
-
