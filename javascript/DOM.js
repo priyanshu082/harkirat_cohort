@@ -61,7 +61,7 @@ function maxLen(){
     let inputarea=document.getElementById("txtarea")
     let counter=document.getElementById("counter")
     inputarea.addEventListener("input",()=>{
-        counter.textContent=100-inputarea.value.length+"characters remaining" 
+        counter.textContent=178-inputarea.value.length+"characters remaining" 
     })
 }
 maxLen();
@@ -87,6 +87,29 @@ deBounce()
 
 
 
+let close=document.getElementById("close-btn")
+let modal=document.getElementById("modal")
+let open=document.getElementById("open-btn")
+
+open.addEventListener("click",()=>{
+    modal.style.display="block"
+})
+close.addEventListener("click",()=>{
+    modal.style.display="none"
+})
+
+modal.addEventListener("click", (e) => {
+    // Close only if clicked on backdrop, not the content
+    if(e.target === modal) {
+        modal.style.display = "none";
+    }
+});
+ 
+document.addEventListener("keydown",(e)=>{
+    if(e.key=="Escape" && modal.style.display==='block'){
+        modal.style.display="none"
+    }
+})
 
 
 

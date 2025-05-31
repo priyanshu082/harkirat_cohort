@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <title>DOM</title>
 </head>
 <body>
     <button id="btn">
@@ -13,11 +14,20 @@
         click me 2
     </button>
 
-    <textarea id="txtarea" maxlength="100"></textarea>
+    <textarea id="txtarea" maxlength="178"></textarea>
     <div id="counter">100 character are remaining</div>
 
     <input type="text" id="debounce" placeholder="search..." />
     <div id="searchtxt"></div>
+
+    <button id="open-btn">Modal</button>
+    <div class="modal-backdrop" id="modal">
+        <div class="modal-content">
+            <div>Title</div>
+            <div>Content of the modal which we have to show</div>
+            <div id="close-btn" class="cross">X</div>
+        </div>
+    </div>
     
     <script src="./DOM.js"></script>
 </body>
