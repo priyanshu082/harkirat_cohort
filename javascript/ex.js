@@ -419,18 +419,18 @@
 
 // console.log(groupByProperty(arr))
 
-const obj= {a:1, b:{c:1, d:{e:1}}}
-function findAllPaths(obj,value,parent="", res=[],){
-    for(key in obj){
-        if(typeof obj[key]==="object" && obj[key]!==null){
-            findAllPaths(obj[key],value,parent ? parent+"."+key : key,res,value);
-        }else{
-            const newKey = parent ? parent + "." + key : key;
-            if(obj[key]===value) res.push(newKey)
-        }
-    }
+// const obj= {a:1, b:{c:1, d:{e:1}}}
+// function findAllPaths(obj,value,parent="", res=[],){
+//     for(key in obj){
+//         if(typeof obj[key]==="object" && obj[key]!==null){
+//             findAllPaths(obj[key],value,parent ? parent+"."+key : key,res,value);
+//         }else{
+//             const newKey = parent ? parent + "." + key : key;
+//             if(obj[key]===value) res.push(newKey)
+//         }
+//     }
 
-    return res
-}
+//     return res
+// }
 
-console.log(findAllPaths(obj,1))
+// console.log(findAllPaths(obj,1))

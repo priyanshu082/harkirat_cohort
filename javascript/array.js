@@ -12,7 +12,7 @@ Example:
     let arr = [1, 2, 3, "hello", true, {a: 1}];
 
 2. How to Create Arrays?
-------------------------
+------------------------ 
 - Using array literal:
     let arr = [1, 2, 3];
 - Using Array constructor:
@@ -91,6 +91,9 @@ Example:
 --------------------------------------------
 
 Q1. Reverse an array in place.
+Example:
+    Input: [1,2,3,4,5]
+    Output: [5,4,3,2,1]
     function reverseArray(arr) {
         let left = 0, right = arr.length - 1;
         while(left < right) {
@@ -101,25 +104,39 @@ Q1. Reverse an array in place.
     }
 
 Q2. Remove duplicates from an array.
+Example:
+    Input: [1,2,2,3,4,4,5]
+    Output: [1,2,3,4,5]
     function removeDuplicates(arr) {
         return [...new Set(arr)];
     }
 
 Q3. Find the maximum and minimum in an array.
+Example:
+    Input: [3, 1, 7, 2, 9]
+    Output: {max: 9, min: 1}
     function findMaxMin(arr) {
         return {max: Math.max(...arr), min: Math.min(...arr)};
     }
 
 Q4. Flatten a nested array (one level).
+Example:
+    Input: [1, [2,3], 4, [5,6]]
+    Output: [1,2,3,4,5,6]
     function flatten(arr) {
         return arr.reduce((acc, val) => acc.concat(val), []);
     }
     // For deep flatten:
+    // Input: [1, [2, [3, 4]], 5]
+    // Output: [1,2,3,4,5]
     function deepFlatten(arr) {
         return arr.flat(Infinity);
     }
 
 Q5. Check if two arrays are equal.
+Example:
+    Input: [1,2,3], [1,2,3] => true
+           [1,2,3], [3,2,1] => false
     function arraysEqual(a, b) {
         if(a.length !== b.length) return false;
         for(let i=0; i<a.length; i++) {
@@ -129,17 +146,26 @@ Q5. Check if two arrays are equal.
     }
 
 Q6. Find intersection of two arrays.
+Example:
+    Input: [1,2,3,4], [3,4,5,6]
+    Output: [3,4]
     function intersection(a, b) {
         return a.filter(x => b.includes(x));
     }
 
 Q7. Rotate an array by k steps.
+Example:
+    Input: [1,2,3,4,5], k=2
+    Output: [4,5,1,2,3]
     function rotateArray(arr, k) {
         k = k % arr.length;
         return arr.slice(-k).concat(arr.slice(0, -k));
     }
 
 Q8. Find the frequency of each element.
+Example:
+    Input: [1,2,2,3,3,3]
+    Output: {1:1, 2:2, 3:3}
     function frequency(arr) {
         return arr.reduce((acc, val) => {
             acc[val] = (acc[val] || 0) + 1;
@@ -148,6 +174,9 @@ Q8. Find the frequency of each element.
     }
 
 Q9. Find the second largest element.
+Example:
+    Input: [10, 5, 8, 20, 15]
+    Output: 15
     function secondLargest(arr) {
         let first = -Infinity, second = -Infinity;
         for(let num of arr) {
@@ -162,11 +191,17 @@ Q9. Find the second largest element.
     }
 
 Q10. Remove falsy values from array.
+Example:
+    Input: [0, 1, false, 2, '', 3, null, undefined]
+    Output: [1,2,3]
     function removeFalsy(arr) {
         return arr.filter(Boolean);
     }
 
 Q11. Chunk an array into groups of size n.
+Example:
+    Input: [1,2,3,4,5], n=2
+    Output: [[1,2],[3,4],[5]]
     function chunkArray(arr, n) {
         let res = [];
         for(let i=0; i<arr.length; i+=n) {
@@ -176,6 +211,9 @@ Q11. Chunk an array into groups of size n.
     }
 
 Q12. Find all pairs in array that sum to a target.
+Example:
+    Input: [1,2,3,4,5], target=5
+    Output: [[4,1],[3,2]]
     function pairSum(arr, target) {
         let res = [];
         let seen = new Set();
@@ -189,6 +227,9 @@ Q12. Find all pairs in array that sum to a target.
     }
 
 Q13. Move all zeros to end of array.
+Example:
+    Input: [0,1,0,3,12]
+    Output: [1,3,12,0,0]
     function moveZeros(arr) {
         let nonZero = arr.filter(x => x !== 0);
         let zeros = arr.filter(x => x === 0);
@@ -196,6 +237,9 @@ Q13. Move all zeros to end of array.
     }
 
 Q14. Find the longest increasing subsequence (LIS) (Medium)
+Example:
+    Input: [10,9,2,5,3,7,101,18]
+    Output: 4 // (The LIS is [2,3,7,101])
     function lengthOfLIS(nums) {
         if(nums.length === 0) return 0;
         let dp = Array(nums.length).fill(1);
@@ -210,6 +254,9 @@ Q14. Find the longest increasing subsequence (LIS) (Medium)
     }
 
 Q15. Find the subarray with the maximum sum (Kadane's Algorithm) (Medium)
+Example:
+    Input: [-2,1,-3,4,-1,2,1,-5,4]
+    Output: 6 // (The subarray is [4,-1,2,1])
     function maxSubArray(nums) {
         let maxSum = nums[0], currSum = nums[0];
         for(let i=1; i<nums.length; i++) {
@@ -220,6 +267,9 @@ Q15. Find the subarray with the maximum sum (Kadane's Algorithm) (Medium)
     }
 
 Q16. Remove element in-place (Leetcode 27)
+Example:
+    Input: [3,2,2,3], val=3
+    Output: 2, nums = [2,2,_,_]
     function removeElement(nums, val) {
         let k = 0;
         for(let i=0; i<nums.length; i++) {
@@ -231,6 +281,9 @@ Q16. Remove element in-place (Leetcode 27)
     }
 
 Q17. Merge two sorted arrays (Leetcode 88)
+Example:
+    Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+    Output: nums1 = [1,2,2,3,5,6]
     function merge(nums1, m, nums2, n) {
         let i = m - 1, j = n - 1, k = m + n - 1;
         while(j >= 0) {
@@ -243,6 +296,9 @@ Q17. Merge two sorted arrays (Leetcode 88)
     }
 
 Q18. Find missing number in array 1..n (Leetcode 268)
+Example:
+    Input: [3,0,1]
+    Output: 2
     function missingNumber(nums) {
         let n = nums.length;
         let sum = n*(n+1)/2;
@@ -251,6 +307,16 @@ Q18. Find missing number in array 1..n (Leetcode 268)
     }
 
 Q19. Find all unique permutations of an array (Medium)
+Example:
+    Input: [1,2,3]
+    Output: [
+      [1,2,3],
+      [1,3,2],
+      [2,1,3],
+      [2,3,1],
+      [3,1,2],
+      [3,2,1]
+    ]
     function permute(nums) {
         let res = [];
         function backtrack(path, used) {
@@ -272,6 +338,13 @@ Q19. Find all unique permutations of an array (Medium)
     }
 
 Q20. Spiral order traversal of a matrix (Medium)
+Example:
+    Input: [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9]
+    ]
+    Output: [1,2,3,6,9,8,7,4,5]
     function spiralOrder(matrix) {
         let res = [];
         if(matrix.length === 0) return res;
