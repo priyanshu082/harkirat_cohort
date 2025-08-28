@@ -249,17 +249,17 @@ console.log(counters[0]()); // { count: 2, total: 3 }
 /*
 11. Write a function `memoize(fn, resolver)` that memoizes the result of `fn`. The resolver is a function that computes the cache key from the arguments. Use closure to store the cache.
 */
-function memoize(fn, resolver) {
+function memoize(fn) {
     const cache = new Map();
     return function(...args) {
-        const key = resolver ? resolver(...args) : args[0];
+        const key = JSON.stringify(args);
         if (cache.has(key)) return cache.get(key);
         const result = fn.apply(this, args);
         cache.set(key, result);
         return result;
     }
 }
-const memoizedAdd = memoize((a, b) => a + b, (a, b) => `${a},${b}`);
+const memoizedAdd = memoize((a, b) => a + b);
 console.log(memoizedAdd(1,2)); // 3
 console.log(memoizedAdd(1,2)); // 3 (cached)
 

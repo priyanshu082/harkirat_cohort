@@ -52,7 +52,7 @@ Example:
 
 6. Higher Order Array Methods
 ----------------------------
-- map: Returns new array with function applied to each element
+- map:Returns new array with function applied to each element
     let doubled = arr.map(x => x*2);
 - filter: Returns new array with elements that pass test
     let evens = arr.filter(x => x%2===0);
@@ -123,9 +123,11 @@ Q4. Flatten a nested array (one level).
 Example:
     Input: [1, [2,3], 4, [5,6]]
     Output: [1,2,3,4,5,6]
+    
     function flatten(arr) {
         return arr.reduce((acc, val) => acc.concat(val), []);
     }
+
     // For deep flatten:
     // Input: [1, [2, [3, 4]], 5]
     // Output: [1,2,3,4,5]
