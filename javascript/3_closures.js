@@ -165,7 +165,7 @@ function cacheFunction(fn) {
         if (cache.hasOwnProperty(key)) {
             return cache[key];
         } else {
-            const result = fn.apply(this, args);
+            const result = fn(args);
             cache[key] = result;
             return result;
         }
@@ -259,6 +259,7 @@ function memoize(fn) {
         return result;
     }
 }
+
 const memoizedAdd = memoize((a, b) => a + b);
 console.log(memoizedAdd(1,2)); // 3
 console.log(memoizedAdd(1,2)); // 3 (cached)

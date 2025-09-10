@@ -50,7 +50,7 @@ var a = function b(){}
 function a(x,y){
     console.log(x);
     console.log(y);
-    }
+}
     a(10,20);
     //here x and y are parameters
     //10 and 20 are arguments
@@ -76,12 +76,27 @@ var b = a();
 //they are a shorthand for writing functions
 //they are used when we need to return a value
 //example
-var a = function(x,y){
-    return x+y;
-}
-var b = (x,y) =>{
-    x+y
-}
+// Example: Traditional function expression
+var a = function(x, y) {
+    return x + y;
+};
+// This defines a function 'a' that takes two arguments and returns their sum.
+
+// Example: Arrow function
+var b = (x, y) => {
+    return x + y;
+};
+// This is an arrow function, which is a shorter syntax for writing functions in JavaScript.
+// It does the same thing as 'a': takes two arguments and returns their sum.
+
+// Note: If you omit the curly braces in an arrow function, the expression is returned automatically:
+var c = (x, y) => x + y;
+// This is equivalent to the above, but even shorter. The result of x + y is returned.
+
+// Important: In the original code, 'b' was written as:
+//   var b = (x, y) => { x + y }
+// This does NOT return anything because curly braces without 'return' means a function body with no explicit return.
+// Always use 'return' inside curly braces, or omit the braces for an implicit return.
 //here a and b are doing the same thing
 
 
