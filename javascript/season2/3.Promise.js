@@ -6,30 +6,37 @@
 //so it will return all the values of the promises after 3s
 //promise.all make all the promises in parallel 
 //if any of the promise is rejected than it will throw error and wont wait for the rest of the promises to get resolved
-const p1=new Promise((resolve,reject)=>{
+const p1 = new Promise((resolve,reject)=>{
     setTimeout(()=>{
-        reject("P1 rejected")
+        resolve("P1 rejected")
     },3000)
 })
 
 const p2=new Promise((resolve,reject)=>{
     setTimeout(()=>{
-        reject("P2 rejected") //will throw error 
+        resolve("P2 rejected") //will throw error 
     },2000)
 })
 
 const p3=new Promise((resolve,reject)=>{
     setTimeout(()=>{
-        reject("P3 rejected") 
+        resolve("P3 rejected") 
     },1000)
 })
 
 
-Promise.all([p1,p2,p3]).then((res)=>[
-    console.log(res),
-]).catch((error)=>{
-    console.log("Error in promise.all",error)
-})
+// Promise.all: Runs all promises in parallel and waits for all to resolve. 
+// If any promise rejects, Promise.all immediately rejects with that error and does not wait for the rest.
+Promise.all([p1, p2, p3])
+    .then((res) => {
+        console.log(res);
+    })
+    .catch((error) => {
+        console.log("Error in promise.all", error);
+    });
+
+// Output:
+// Error in promise.all P3 rejected
 
 
 
@@ -68,7 +75,7 @@ Promise.race([p1,p2,p3]).then((res)=>{
 //promise.any([p1,p2,p3])
 //when ever the first promise get resolve it will return the value of that promise
 //if all the promises get rejected then it will return undefined (aggregate error)
-//will only wait for frist success but if any rejected it will still wait for the success of any one
+//will only wait for first success but if any rejected it will still wait for the success of any one
 Promise.any([p1,p2,p3]).then((res)=>{
     console.log(res)
 }).catch((err)=>{

@@ -9,7 +9,7 @@
 
 //so we need to create a flow of pages
 
-// const cart=["itme1","item1","item3"];
+// const cart=["item1","item1","item3"];
 
 // api.createOrder(cart, function(){
 
@@ -54,7 +54,7 @@
 
 const GITHUB_API="https://api.github.com/users/priyanshu082"
 
-const user =fetch(GITHUB_API)
+const user = fetch(GITHUB_API)
 
 user.then((data)=>{
     console.log(data)
