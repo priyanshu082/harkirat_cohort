@@ -86,3 +86,131 @@ Promise.any([p1,p2,p3]).then((res)=>{
 // P3 resolved
 
 
+// Polyfill for Promise.all
+// This function works just like Promise.all. It takes an array (or iterable) of promises (or values).
+// It returns a new promise that:
+//   - resolves with an array of all resolved values (in the same order as input)
+//   - rejects as soon as any one promise rejects (with that error)
+// If the input array is empty, it resolves immediately with an empty array.
+Promise.myAll = function(promises) {
+    return new Promise((resolve, reject) => {
+        let results = []; // This will store the resolved values in the correct order
+        let completed = 0; // This counts how many promises have finished (resolved)
+        promises = Array.from(promises); // Make sure we have an array (in case it's not)
+        if (promises.length === 0) return resolve([]); // If nothing to wait for, resolve right away
+
+        // Go through each promise/value in the input
+        promises.forEach((p, i) => {
+            // Make sure p is a promise (if it's a value, Promise.resolve will wrap it)
+            Promise.resolve(p).then(
+                val => {
+                    // When this promise resolves, save its value at the correct index
+                    results[i] = val;
+                    completed++; // One more promise finished
+                    // If all promises have finished, resolve the main promise with all results
+                    if (completed === promises.length) {
+                        resolve(results);
+                    }
+                },
+                err => {
+                    // If any promise rejects, reject the main promise immediately with that error
+                    reject(err);
+                }
+            );
+        });
+    });
+};
+
+// Polyfill for Promise.allSettled
+// This function works like Promise.allSettled. It takes an array (or iterable) of promises (or values).
+// It returns a new promise that resolves after all input promises have finished (either resolved or rejected).
+// The result is an array of objects, each describing the outcome for each input:
+//   - { status: "fulfilled", value: ... } if resolved
+//   - { status: "rejected", reason: ... } if rejected
+// If the input is empty, resolves immediately with an empty array.
+Promise.myAllSettled = function(promises) {
+    return new Promise((resolve) => {
+        let results = []; // This will store the result objects for each promise
+        let completed = 0; // Counts how many promises have finished (either way)
+        promises = Array.from(promises); // Make sure we have an array
+        if (promises.length === 0) return resolve([]); // If nothing to wait for, resolve right away
+
+        // Go through each promise/value in the input
+        promises.forEach((p, i) => {
+            Promise.resolve(p).then(
+                val => {
+                    // If promise resolved, store fulfilled status and value
+                    results[i] = { status: "fulfilled", value: val };
+                    completed++;
+                    // If all promises have finished, resolve with the results array
+                    if (completed === promises.length) resolve(results);
+                },
+                err => {
+                    // If promise rejected, store rejected status and reason
+                    results[i] = { status: "rejected", reason: err };
+                    completed++;
+                    // If all promises have finished, resolve with the results array
+                    if (completed === promises.length) resolve(results);
+                }
+            );
+        });
+    });
+};
+
+// Polyfill for Promise.race
+// This function works like Promise.race. It takes an array (or iterable) of promises (or values).
+// It returns a new promise that settles (resolves or rejects) as soon as any input promise settles.
+// The value or error is the same as the first settled promise.
+Promise.myRace = function(promises) {
+    return new Promise((resolve, reject) => {
+        // Go through each promise/value in the input
+        for (let p of promises) {
+            // As soon as any promise resolves or rejects, settle the main promise the same way
+            Promise.resolve(p).then(resolve, reject);
+        }
+    });
+};
+
+// Polyfill for Promise.any
+// This function works like Promise.any. It takes an array (or iterable) of promises (or values).
+// It returns a new promise that:
+//   - resolves as soon as any input promise resolves (with that value)
+//   - if all promises reject, it rejects with an AggregateError (or Error) containing all errors
+// If the input is empty, it rejects immediately.
+Promise.myAny = function(promises) {
+    return new Promise((resolve, reject) => {
+        let errors = []; // This will store the errors from rejected promises
+        let rejectedCount = 0; // Counts how many promises have rejected
+        promises = Array.from(promises); // Make sure we have an array
+        if (promises.length === 0) {
+            // If input is empty, reject right away with an AggregateError or Error
+            return reject(new (typeof AggregateError !== "undefined" ? AggregateError : Error)([], "All promises were rejected"));
+        }
+        // Go through each promise/value in the input
+        promises.forEach((p, i) => {
+            Promise.resolve(p).then(
+                val => {
+                    // As soon as any promise resolves, resolve the main promise with that value
+                    resolve(val);
+                },
+                err => {
+                    // If promise rejects, store the error at the correct index
+                    errors[i] = err;
+                    rejectedCount++;
+                    // If all promises have rejected, reject with all errors
+                    if (rejectedCount === promises.length) {
+                        if (typeof AggregateError !== "undefined") {
+                            // If AggregateError is supported (modern JS), use it
+                            reject(new AggregateError(errors, "All promises were rejected"));
+                        } else {
+                            // Fallback for older JS: use Error and attach errors array
+                            let error = new Error("All promises were rejected");
+                            error.errors = errors;
+                            reject(error);
+                        }
+                    }
+                }
+            );
+        });
+    });
+};
