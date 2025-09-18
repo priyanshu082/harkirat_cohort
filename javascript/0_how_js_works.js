@@ -53,3 +53,56 @@ square2 = 4
 square4 = 16
 value = 10
 */
+
+
+
+var x=1;
+a()
+b();
+console.log(x);
+function a(){
+    var x=10;
+    console.log(x);
+}
+function b(){
+    var x=100;
+    console.log(x);
+}
+
+
+/*
+GEC (Global Execution Context) Creation for this code:
+
+1. Memory Creation Phase (Hoisting):
+   - x: undefined
+   - a: function definition (hoisted)
+   - b: function definition (hoisted)
+
+2. Code Execution Phase (Line by Line Execution):
+   - var x = 1;         // x = 1
+   - a();               // Calls function a:
+                        //   - New EC for a
+                        //   - Memory Phase in a EC:
+                        //       - x: undefined
+                        //   - Execution Phase in a EC:
+                        //       - var x = 10; // x = 10 (local to a)
+                        //       - console.log(x); // logs 10
+   - b();               // Calls function b:
+                        //   - New EC for b
+                        //   - Memory Phase in b EC:
+                        //       - x: undefined
+                        //   - Execution Phase in b EC:
+                        //       - var x = 100; // x = 100 (local to b)
+                        //       - console.log(x); // logs 100
+   - console.log(x);    // logs 1 (global x)
+
+Final values in GEC:
+x = 1
+a = function
+b = function
+
+Output:
+10
+100
+1
+*/

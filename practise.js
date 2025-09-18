@@ -1,19 +1,6 @@
-function debounce(fn,delay){
-  let timer;
-  return function(...args){
-    clearTimeout(timer);
-    timer=setTimeout(() => {
-      fn(...args);
-    }, delay);
-  }
+var b;
+function a(){
+    console.log(b);
 }
-
-let count=0;
-const debounced=debounce((num)=>{
-  count++ ;
-  console.log("Debounced " , count)
-}, 1000)
-
-debounced(2);
-debounced(5);
-debounced(9);
+a();
+b = 10; //b is hoisted to the top of the scope
