@@ -9,3 +9,4 @@ Function.prototype.myApply = function (context, args = []) {
 
 function sum(a, b) { return this.x + a + b; }
 console.log(sum.myApply({ x: 5 }, [2, 3])); 
+
