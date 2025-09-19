@@ -1,6 +1,5 @@
-var b;
-function a(){
-    console.log(b);
+let y=20;
+{
+  console.log(y);
+  let y=10;
 }
-a();
-b = 10; //b is hoisted to the top of the scope

@@ -52,7 +52,27 @@ square = function
 square2 = 4
 square4 = 16
 value = 10
+
+// Call Stack Visualization (for square2 and square4):
+//
+// Before any function call:
+// [GEC]
+//
+// When square2 = square(n) is executed:
+// [square Execution Context]
+// [GEC]
+//
+// After square returns:
+// [GEC]
+//
+// When square4 = square(4) is executed:
+// [square Execution Context]
+// [GEC]
+//
+// After square returns:
+// [GEC]
 */
+
 
 
 
@@ -105,4 +125,26 @@ Output:
 10
 100
 1
+
+// Call Stack Visualization:
+//
+// Before any function call:
+// [GEC]
+//
+// When a() is called:
+// [a Execution Context]
+// [GEC]
+//
+// After a() returns:
+// [GEC]
+//
+// When b() is called:
+// [b Execution Context]
+// [GEC]
+//
+// After b() returns:
+// [GEC]
+//
+// When console.log(x) is called (still in GEC):
+// [GEC]
 */

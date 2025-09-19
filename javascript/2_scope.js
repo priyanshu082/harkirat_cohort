@@ -1,3 +1,35 @@
+/*
+    Block in JavaScript
+
+    - A block is a pair of curly braces `{ ... }` used to group zero or more statements.
+    - Blocks are commonly used in control structures (if, for, while, etc.) and to create new scopes with `let` and `const`.
+    - Variables declared with `var` inside a block are NOT block-scoped (they are function or globally scoped).
+    - Variables declared with `let` and `const` inside a block ARE block-scoped (they exist only within that block).
+
+    Example:
+*/
+
+{
+    // This is a block
+    let blockScoped = "I exist only in this block";
+    var notBlockScoped = "I exist outside the block too";
+    console.log(blockScoped); // Works
+}
+try {
+    console.log(blockScoped); // ReferenceError: blockScoped is not defined
+} catch (e) {
+    console.log("blockScoped is not accessible outside the block");
+}
+console.log(notBlockScoped); // Works: var is not block-scoped
+
+/*
+    Summary:
+    - Use blocks to group statements and create new scopes for `let` and `const`.
+    - `var` ignores block scope, but `let` and `const` respect it.
+*/
+
+
+
 var b;
 function a(){
     console.log(b);
