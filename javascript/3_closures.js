@@ -21,7 +21,7 @@ myClosure(); // Output: I am from outer scope
 
 /*
     Another Example: Counter using Closure
-    -------------------------------------
+    --------------------------------------
 */
 function makeCounter() {
     let count = 0;
@@ -150,7 +150,6 @@ console.log(multipliers[2](10)); // 30
 
    Example:
        function slowSquare(n) { 
-           // Simulate slow computation
            for(let i=0;i<1e7;i++){}
            return n * n; 
        }
@@ -170,16 +169,21 @@ function cacheFunction(fn) {
             return result;
         }
     }
-}
-
-
-function slowSquare(n) { 
-    for(let i=0;i<1e7;i++){}
+  }
+  
+  function slowSquare(n) { 
+    for(let i=0;i<1e9;i++){}
     return n * n; 
-}
-const cachedSquare = cacheFunction(slowSquare);
-console.log(cachedSquare(5)); // computes and returns 25
-console.log(cachedSquare(5)); // returns cached 25 instantly
+  }
+  const cachedSquare = cacheFunction(slowSquare);
+  
+  console.time("First call");
+  console.log(cachedSquare(5)); 
+  console.timeEnd("First call");
+  
+  console.time("Second call");
+  console.log(cachedSquare(5)); 
+  console.timeEnd("Second call");
 
 /*
 7. Write a function `makeAdder(x)` that returns a function which adds `x` to its argument.
@@ -218,12 +222,16 @@ debounced(); // Only one "Debounced 1" after 100ms
 9. Write a function `groupBy(arr, fn)` that groups elements of `arr` by the result of calling `fn` on each element. Use closures to maintain the grouping.
 */
 function groupBy(arr, fn) {
-    return arr.reduce((groups, item) => {
+    const groups = {};
+    for (let i = 0; i < arr.length; i++) {
+        const item = arr[i];
         const key = fn(item);
-        if (!groups[key]) groups[key] = [];
+        if (!groups[key]) {
+            groups[key] = [];
+        }
         groups[key].push(item);
-        return groups;
-    }, {});
+    }
+    return groups;
 }
 console.log(groupBy([6.1, 4.2, 6.3], Math.floor)); // { '4': [ 4.2 ], '6': [ 6.1, 6.3 ] }
 
@@ -349,25 +357,3 @@ console.log(greetOnce("Alice")); // Hello, Alice!
 console.log(greetOnce("Alice")); // Hello, Alice! (cached)
 console.log(greetOnce("Bob"));   // Hello, Bob!
 
-/*
-17. Write a function `makeObservable(target)` that returns a proxy for the target object, and allows registering observers that are notified on property changes. Use closure to store the observers.
-*/
-function makeObservable(target) {
-    const observers = [];
-    const proxy = new Proxy(target, {
-        set(obj, prop, value) {
-            obj[prop] = value;
-            observers.forEach(fn => fn(prop, value));
-            return true;
-        }
-    });
-    proxy.observe = function(fn) {
-        observers.push(fn);
-    }
-    return proxy;
-}
-const user = makeObservable({name: "John"});
-user.observe((key, value) => {
-    console.log(`Property ${key} set to ${value}`);
-});
-user.name = "Alice"; // Property name set to Alice

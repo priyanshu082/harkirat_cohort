@@ -1,1 +1,1 @@
-function foo()
+hasOwnProperty
