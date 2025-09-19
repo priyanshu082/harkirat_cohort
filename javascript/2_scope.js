@@ -1,14 +1,20 @@
 /*
-    Block in JavaScript
 
+==========================================================
+    BLOCKS AND SCOPE IN JAVASCRIPT
+==========================================================
+*/
+
+/*
+    1. BLOCKS IN JAVASCRIPT
+    -----------------------
     - A block is a pair of curly braces `{ ... }` used to group zero or more statements.
     - Blocks are commonly used in control structures (if, for, while, etc.) and to create new scopes with `let` and `const`.
     - Variables declared with `var` inside a block are NOT block-scoped (they are function or globally scoped).
     - Variables declared with `let` and `const` inside a block ARE block-scoped (they exist only within that block).
-
-    Example:
 */
 
+// Example: Block Scope
 {
     // This is a block
     let blockScoped = "I exist only in this block";
@@ -20,7 +26,7 @@ try {
 } catch (e) {
     console.log("blockScoped is not accessible outside the block");
 }
-console.log(notBlockScoped); // Works: var is not block-scoped
+console.log(notBlockScoped); 
 
 /*
     Summary:
@@ -28,18 +34,25 @@ console.log(notBlockScoped); // Works: var is not block-scoped
     - `var` ignores block scope, but `let` and `const` respect it.
 */
 
+/*
+==========================================================
+    HOISTING AND LEXICAL ENVIRONMENT
+==========================================================
+*/
 
-
+// Example: Hoisting with var
 var b;
-function a(){
+function a() {
     console.log(b);
 }
-b = 10; //b is hoisted to the top of the scope
+b = 10; // b is hoisted to the top of the scope
 a();
-// b=10 is not hoisted to the top of the scope it is still undefined
-/*
-    Lexical Environment and Scope in JavaScript
+// Note: Only the declaration (var b) is hoisted, not the assignment (b = 10).
 
+/*
+==========================================================
+    LEXICAL ENVIRONMENT AND SCOPE IN JAVASCRIPT
+==========================================================
     1. Lexical Environment:
        - A Lexical Environment is a structure that holds identifier-variable mapping (i.e., where variable names are mapped to the values).
        - It consists of two components:
@@ -53,10 +66,9 @@ a();
          a) Global Scope
          b) Function/Local Scope
          c) Block Scope (introduced with ES6: let, const)
-
-    3. Example: Lexical Environment and Scope
-
 */
+
+/* Example: Lexical Environment and Scope */
 
 // Global Scope
 var globalVar = "I am global";
@@ -81,7 +93,9 @@ outer();
 // console.log(outerVar); // Error: outerVar is not defined (not accessible here)
 
 /*
-    Block Scope Example (let, const)
+==========================================================
+    BLOCK SCOPE WITH let, const, var
+==========================================================
 */
 
 if (true) {
@@ -95,15 +109,18 @@ if (true) {
 console.log(blockVar); // Accessible: I am function or global scoped
 
 /*
-    How Lexical Environment Works:
+==========================================================
+    HOW LEXICAL ENVIRONMENT WORKS
+==========================================================
     - When a function is executed, a new Lexical Environment is created.
     - It first looks for variables in its own environment record.
     - If not found, it looks up the chain to the outer environment (parent), and so on, until the global environment.
 */
 
 /*
-    Interview Questions on Lexical Environment and Scope:
-
+==========================================================
+    INTERVIEW QUESTIONS ON LEXICAL ENVIRONMENT AND SCOPE
+==========================================================
     1. What is a lexical environment in JavaScript?
        - It's the structure that holds variable and function declarations and references to its parent environment.
 
@@ -122,7 +139,7 @@ console.log(blockVar); // Accessible: I am function or global scoped
     6. Can you give an example of closure?
 */
 
-// Closure Example
+// Example: Closure
 function makeCounter() {
     let count = 0;
     return function() {
@@ -142,6 +159,7 @@ console.log(counter2()); // 1
     7. What will be the output of the following code?
 */
 
+// Example: Hoisting and Shadowing
 var x = 1;
 function foo() {
     console.log(x);
@@ -159,7 +177,7 @@ foo();
        - The period between entering scope and variable declaration (with let/const) where the variable cannot be accessed.
 */
 
-// Example:
+// Example: Temporal Dead Zone
 {
     // console.log(y); // ReferenceError: Cannot access 'y' before initialization
     let y = 5;
@@ -174,28 +192,34 @@ foo();
 
     11. Can you access a variable declared inside a function from outside?
         - No, unless you return it or expose it via closure.
-
-    12. What is shadowing in JavaScript?
-        - When a variable declared within a certain scope (e.g., function or block) has the same name as a variable in an outer scope, the inner variable "shadows" the outer one.
-
-    Example:
 */
 
-let shadow = "outer";
-function testShadow() {
-    let shadow = "inner";
-    console.log(shadow); // inner
-}
-testShadow();
-console.log(shadow); // outer
+
 
 /*
-    13. What is the difference between execution context and lexical environment?
+==========================================================
+    OTHER INTERVIEW QUESTIONS
+==========================================================
+    12. What is the temporal dead zone?
+        - The period between entering scope and variable declaration (with let/const) where the variable cannot be accessed.
+
+    13. How does the scope chain work?
+        - When resolving a variable, JavaScript looks in the current scope, then the parent scope, and so on up to the global scope.
+
+    14. What is the global object in JavaScript?
+        - In browsers, it's 'window'; in Node.js, it's 'global'. Variables declared with var in the global scope become properties of the global object.
+
+    15. Can you access a variable declared inside a function from outside?
+        - No, unless you return it or expose it via closure.
+
+    16. What is the difference between execution context and lexical environment?
         - Execution context is a concept that contains the lexical environment, variable environment, and 'this' binding. Lexical environment is part of the execution context.
 */
 
 /*
-    Summary:
+==========================================================
+    SUMMARY
+==========================================================
     - Lexical Environment: Structure holding variable/function declarations and reference to parent.
     - Scope: Rules for variable access.
     - Scope Chain: Chain of lexical environments for variable resolution.

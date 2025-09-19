@@ -1,5 +1,7 @@
-let y=20;
-{
-  console.log(y);
-  let y=10;
+var x = 1;
+function foo() {
+    console.log(x);
+    var x = 2;
+    console.log(x);
 }
+foo();

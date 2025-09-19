@@ -1,1 +1,1 @@
-log
+function foo()
