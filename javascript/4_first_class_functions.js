@@ -1,5 +1,4 @@
 //1. Function Statement (Function Declaration)
-
 function a() {}
 // This way of creating the function is called a function statement (or function declaration).
 // It IS hoisted (the function can be called before its definition).

@@ -20,8 +20,8 @@ function addEvent2(){
 
 
 
-// addEvent()
-// addEvent2()
+addEvent()
+addEvent2()
 
 // What Happens Step-by-Step:
 //
@@ -56,12 +56,11 @@ function removeEvent(){
 
 // Build a live character counter
 // When a user types into a textarea, show how many characters are remaining (max 100).
-function maxLen(){
-    // let counter=100;
+function maxLen(){  
     let inputarea=document.getElementById("txtarea")
     let counter=document.getElementById("counter")
     inputarea.addEventListener("input",()=>{
-        counter.textContent=178-inputarea.value.length+"characters remaining" 
+        counter.textContent=178-inputarea.value.length+" characters remaining" 
     })
 }
 maxLen();

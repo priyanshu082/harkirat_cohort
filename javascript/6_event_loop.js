@@ -36,6 +36,30 @@
 // ------------------------
 // - When an asynchronous operation (like setTimeout, or an event listener) completes, its callback is placed in the callback queue.
 // - The callback queue is a simple FIFO (First In, First Out) queue.
+// ------------------------
+//   Starvation in the Event Loop
+// ------------------------
+// Starvation happens when some tasks never get a chance to run because other tasks keep taking priority.
+// In JavaScript, this can occur if microtasks (like Promises) are continuously queued, preventing macrotasks (like setTimeout, setInterval, or user events) from executing.
+//
+// Example of starvation:
+//
+// setTimeout(() => {
+//     console.log('Macrotask executed');
+// }, 0);
+//
+// function runMicrotasksForever() {
+//     Promise.resolve().then(() => {
+//         runMicrotasksForever();
+//     });
+// }
+// runMicrotasksForever();
+//
+// // In this example, the microtask queue is never empty because runMicrotasksForever keeps adding new microtasks.
+// // As a result, the event loop never gets a chance to process the macrotask (setTimeout), causing starvation.
+//
+// // In practice, avoid creating infinite microtask loops, as they can freeze the browser and starve other important tasks.
+
 
 // ------------------------
 //   4. Event Loop
@@ -48,6 +72,13 @@
 //   5. Microtask Queue (Job Queue)
 // ------------------------
 // - Microtasks include promise callbacks (then/catch/finally), MutationObservers, and queueMicrotask.
+// - MutationObservers are a browser API that lets you watch for changes to the DOM (like when elements are added, removed, or changed).
+// - When a DOM mutation is detected, the MutationObserver's callback is scheduled as a microtask, meaning it will run after the current script and before any macrotasks (like setTimeout).
+// - Example:
+//   const observer = new MutationObserver((mutationsList) => {
+//     console.log('DOM changed!', mutationsList);
+//   });
+//   observer.observe(document.body, { childList: true, subtree: true });
 // - Microtasks have higher priority than the callback queue (macrotask queue).
 // - After every task from the callback queue, the event loop will execute all microtasks before moving to the next task.
 
