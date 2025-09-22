@@ -28,9 +28,10 @@ var getname = () => {
     console.log("Hello");
 };
 
-// Function declarations are fully hoisted in JavaScript.
-// This means both the function's name and its body are moved to the top of their scope during the compilation phase.
-// As a result, you can safely call getname2() before its definition in the code, and it will work as expected.
+// Only function statements (function declarations) are fully hoisted in JavaScript, not all functions.
+// This means the entire function declaration (name and body) is moved to the top of its scope during compilation.
+// That's why you can call getname2() before its definition and it works.
+// Function expressions and arrow functions assigned to variables are NOT fully hoisted as functions.
 
 // Calling getname2 before its declaration works fine due to hoisting:
 getname2(); // Output: i am in getname 2

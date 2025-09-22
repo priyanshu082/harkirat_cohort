@@ -14,7 +14,7 @@ GEC (Global Execution Context) Creation:
 
 1. Memory Creation Phase (Hoisting):
    - n: undefined
-   - square: function definition (hoisted)
+   - square: function definition (completely hoisted)
    - square2: undefined
    - square4: undefined
    - value: uninitialized (in TDZ due to let)
