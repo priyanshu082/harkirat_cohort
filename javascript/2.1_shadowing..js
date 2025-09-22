@@ -73,9 +73,9 @@ var z = 10;
 }
 
 // However, the reverse is allowed:
-let y = 10;
+var y = 10;
 {
-    // var y = 20; // ✅ This is allowed, but not recommended. 'var y' is hoisted to the outer/global scope.
+    var y = 20; // ✅ This is allowed, but not recommended. 'var y' is hoisted to the outer/global scope.
     // console.log(y); // 20
 }
 console.log(y); // 20
