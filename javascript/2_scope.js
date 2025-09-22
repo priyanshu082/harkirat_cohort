@@ -15,18 +15,15 @@
 */
 
 // Example: Block Scope
-{
-    // This is a block
-    let blockScoped = "I exist only in this block";
-    var notBlockScoped = "I exist outside the block too";
-    console.log(blockScoped); // Works
+if (true) {
+    let blockLet = "I am block scoped";
+    const blockConst = "I am also block scoped";
+    var blockVar = "I am function or global scoped";
+    // blockLet and blockConst are only accessible inside this block
 }
-try {
-    console.log(blockScoped); // ReferenceError: blockScoped is not defined
-} catch (e) {
-    console.log("blockScoped is not accessible outside the block");
-}
-console.log(notBlockScoped); 
+// console.log(blockLet); // Error: blockLet is not defined
+// console.log(blockConst); // Error: blockConst is not defined
+console.log(blockVar); // Accessible: I am function or global scoped
 
 /*
     Summary:
@@ -92,21 +89,6 @@ function outer() {
 outer();
 // console.log(outerVar); // Error: outerVar is not defined (not accessible here)
 
-/*
-==========================================================
-    BLOCK SCOPE WITH let, const, var
-==========================================================
-*/
-
-if (true) {
-    let blockLet = "I am block scoped";
-    const blockConst = "I am also block scoped";
-    var blockVar = "I am function or global scoped";
-    // blockLet and blockConst are only accessible inside this block
-}
-// console.log(blockLet); // Error: blockLet is not defined
-// console.log(blockConst); // Error: blockConst is not defined
-console.log(blockVar); // Accessible: I am function or global scoped
 
 /*
 ==========================================================
