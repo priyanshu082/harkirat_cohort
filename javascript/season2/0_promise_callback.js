@@ -112,11 +112,16 @@ function getData(callback) {
   // | Feature          | Callback                        | Promise                           |
   // |------------------|---------------------------------|-----------------------------------|
   // | Error Handling   | Har jagah alag handle karna     | Single `.catch` se easy           |
+  // |------------------|---------------------------------|-----------------------------------|
   // | Readability      | Nested → Callback Hell          | Chain aur async/await → clean     |
+  // |------------------|---------------------------------|-----------------------------------|
   // | Composition      | Mushkil (parallel async)        | Easy (`Promise.all`, `race`)      |
+  // |------------------|---------------------------------|-----------------------------------|
   // | Control          | Function ke upar hai            | Promise object tumhare paas       |
+  // |------------------|---------------------------------|-----------------------------------|
   // | Modern Support   | Purana tariqa                   | Modern standard (with async/await)|
-  //
+  // |------------------|---------------------------------|-----------------------------------|
+  
   // Conclusion:
   // - Callbacks → simple tasks ke liye theek
   // - Promises → complex async kaam ke liye best

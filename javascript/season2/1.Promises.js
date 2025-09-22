@@ -1,8 +1,7 @@
 // A Promise is an object which represents eventual completion or failure of an asynchronous operation. Promises are immutable once resolved and they give us a lot of control over our code. They have three state pending, fulfilled or rejected. The promise object contains two parts 1) PromiseState(stores the state of the promise) and 2)PromiseResult(stores data)
 
 
-
-//lets take an example of creating and order 
+//lets take an example of creating an order 
 //first we will select items from cart and after that we will proceed to checkout ,we will do payemnt and suppose after payement we need to show the ordersummary page 
 
 // so basically what we need is we need to first call the cart page and then call the checkout page and then call the order summary page
