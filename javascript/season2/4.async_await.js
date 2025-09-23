@@ -76,6 +76,6 @@ handlePromise()
 //this process will continue until p2 is resolved
 //when p2 is resolved it will push the handlepromise function back into the callstack and will start executing the code line by line
 
-//p1 p2 will start executing in start of the xode when we run and will be resolved in the background
+//p1 p2 will start executing in start of the code when we run and will be resolved in the background
 //so we can say that p1 and p2 are running in parallel
 //but in case of synchronous code it will run one by one but since js is a synchronous it will wait for p1 to complete first then after that it will go to the p2 and return it immediately without any delay of 5 sec 
