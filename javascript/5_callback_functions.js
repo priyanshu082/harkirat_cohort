@@ -26,7 +26,8 @@ greet("Priyanshu", sayGoodbye);
 // --------------------  --------------------
 // --------------------  --------------------
 
-//javascript is a synchronous and single threaded language
+
+// javascript is a synchronous and single threaded language
 // It executes one command at a time in the order they appear.
 // This means only one task runs at a time, and others must wait.
 
