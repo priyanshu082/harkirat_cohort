@@ -1,126 +1,128 @@
 // ===================== Prototype & Inheritance in JS =====================
 
-// --------------------- 1. Prototype kya hai ---------------------
-// Har function ke sath ek "prototype" object hota hai.
-// Usme methods/properties rakhe ja sakte hain jo sab instances ko milte hain.
+// ===================== PROTOTYPE KO TAMEEZ SE SAMAJHO =====================
 
-function Person(name) {
-    this.name = name;
+// 1. Prototype kya hai?
+// --------------------------------------------------
+// Jab bhi JS me koi function banta hai (chahe wo class ho ya normal function),
+// uske sath ek "prototype" naam ka object automatically attach ho jata hai.
+// Is prototype object me aap methods/properties rakh sakte ho,
+// jo us function se banne wale sabhi objects ko milti hain (shared hoti hain).
+
+// Example: Class ke through
+class Person {
+  constructor(name) {
+    this.name = name; // ye har object ki apni property hai
   }
-  
-  // Person ke prototype me ek method add kiya
-  Person.prototype.sayHello = function () {
-    console.log("Hello, my name is " + this.name);
-  };
-  
-  let p1 = new Person("Priyanshu");
-  p1.sayHello(); // "Hello, my name is Priyanshu"
-  
-  // p1 ka __proto__ Person.prototype ko point karega
-  console.log(p1.__proto__ === Person.prototype); // true
-  // Person.prototype ka __proto__ Object.prototype ko point karta hai
-  console.log(Person.prototype.__proto__ === Object.prototype); // true
-  // Prototype chain ka end null hota hai
-  console.log(Object.prototype.__proto__); // null
-  
-  
-  
-  // --------------------- 2. Prototype Chain ---------------------
-  // Agar koi property object me nahi milegi to JS __proto__ chain follow karega
-  // Example: arr.length JS arr me dhundhega, nahi mila to Array.prototype me dekhega
-  
-  let arr = [1, 2, 3];
-  console.log(arr.length); // 3 (mil gaya Array.prototype me)
-  
-  console.log(arr.__proto__ === Array.prototype); // true
-  console.log(Array.prototype.__proto__ === Object.prototype); // true
-  
-  
-  
-  // --------------------- 3. __proto__ ---------------------
-  // __proto__ ek hidden reference hota hai jo parent prototype ko point karta hai
-  
-  function Car(model) {
-    this.model = model;
+}
+
+// Prototype pe method add karte hain (ye sabko milega, memory efficient)
+Person.prototype.sayHello = function () {
+  console.log("Hello, my name is " + this.name);
+};
+
+let p1 = new Person("Priyanshu");
+p1.sayHello(); // "Hello, my name is Priyanshu"
+
+// Prototype chain kaise kaam karti hai?
+// Jab aap p1.sayHello() likhte ho, JS pehle p1 me dhundhta hai,
+// nahi milta to p1.__proto__ (yaani Person.prototype) me dekhta hai.
+
+// Check karo:
+console.log(p1.__proto__ === Person.prototype); // true
+console.log(Person.prototype.__proto__ === Object.prototype); // true
+console.log(Object.prototype.__proto__); // null (chain ka end)
+
+// --------------------------------------------------
+// 2. Prototype Chain kya hoti hai?
+// --------------------------------------------------
+// Jab JS kisi property/method ko object me nahi paata,
+// to wo uske prototype (parent) me dhundhta hai, fir uske parent ke prototype me... (ye chain chalta rehta hai).
+
+let arr = [1, 2, 3];
+// arr.length -- JS pehle arr me dekhega, nahi mila to arr.__proto__ (Array.prototype) me dekhega
+console.log(arr.length); // 3
+console.log(arr.__proto__ === Array.prototype); // true
+console.log(Array.prototype.__proto__ === Object.prototype); // true
+
+// --------------------------------------------------
+// 3. __proto__ kya hai?
+// --------------------------------------------------
+// __proto__ ek hidden property hai jo har object me hoti hai,
+// aur wo us object ke parent prototype ko point karti hai.
+
+function Car(model) {
+  this.model = model;
+}
+let c1 = new Car("BMW");
+
+console.log(c1.__proto__ === Car.prototype); // true
+// c1.__proto__ --> Car.prototype
+// Car.prototype.__proto__ --> Object.prototype
+
+// --------------------------------------------------
+// 4. Object.create ka use
+// --------------------------------------------------
+// Object.create se aap manually kisi bhi object ka prototype set kar sakte ho.
+
+let animal = {
+  eats: true,
+  walk() {
+    console.log("Animal walks");
   }
-  let c1 = new Car("BMW");
-  
-  console.log(c1.__proto__ === Car.prototype); // true
-  console.log("helllll" + c1.__proto__ ); // true
-  console.log("5"+Car.prototype); // true
-  
-  
-  
-  // --------------------- 4. Object.create ---------------------
-  // Object.create ek naya object banata hai jiska prototype hum manually set kar sakte hain
-  
-  let animal = {
-    eats: true,
-    walk() {
-      console.log("Animal walks");
-    }
-  };
-  
-  let rabbit = Object.create(animal); // rabbit ka prototype = animal
-  rabbit.jump = true;
-  
-  console.log(rabbit.eats); // true (inherit from animal)
-  rabbit.walk();            // "Animal walks"
-  console.log(rabbit.jump); // true (own property)
-  
-  
-  
-  // --------------------- 5. Inheritance Example ---------------------
-  // Function-based inheritance (ES5 style)
-  
-  // ===================== Inheritance Example with Detailed Comments =====================
+};
 
-  // 1. Animal constructor function banayi gayi hai, jo har animal ka naam set karegi
-  function Animal(name) {
-    this.name = name; // har object pe 'name' property set ho jayegi
-  }
+let rabbit = Object.create(animal); // rabbit ka prototype = animal
+rabbit.jump = true;
 
-  // 2. Animal ke prototype pe ek method 'speak' add kiya hai
-  //    Taaki jitne bhi Animal ke objects banenge, un sabko ye method mil jaye (memory efficient)
-  Animal.prototype.speak = function () {
-    console.log(this.name + " makes a noise");
-  };
+console.log(rabbit.eats); // true (inherited from animal)
+rabbit.walk();            // "Animal walks"
+console.log(rabbit.jump); // true (own property)
 
-  // 3. Dog constructor function banayi gayi hai, jo Animal se inherit karegi
-  function Dog(name) {
-    // Animal constructor ko call kiya, taki Dog ka object bhi 'name' property inherit kar le
-    // 'this' Dog ke naye object ko refer karega
-    Animal.call(this, name); // super constructor call (inheritance ka pehla step)
-  }
+// --------------------------------------------------
+// 5. Inheritance (function-based, ES5 style)
+// --------------------------------------------------
 
-  // 4. Dog.prototype ko Animal.prototype se inherit karaya
-  //    Isse Dog ke sare objects ko Animal ke prototype wale methods mil jayenge (jaise speak)
-  Dog.prototype = Object.create(Animal.prototype);
+// Step 1: Parent constructor function
+function Animal(name) {
+  this.name = name;
+}
 
-  // 5. Upar wali line se Dog.prototype ka constructor Animal ho gaya tha, isliye wapas Dog pe point kar diya
-  //    Taaki instanceof ya constructor check sahi kaam kare
-  Dog.prototype.constructor = Dog;
+// Step 2: Parent ke prototype pe method
+Animal.prototype.speak = function () {
+  console.log(this.name + " makes a noise");
+};
 
-  // 6. Dog ke prototype pe speak method ko override kar diya
-  //    Ab Dog ke objects jab speak() call karenge, to ye wala method chalega (naya behavior)
-  Dog.prototype.speak = function () {
-    console.log(this.name + " barks");
-  };
+// Step 3: Child constructor function
+function Dog(name) {
+  Animal.call(this, name); // Parent constructor ko call karo (this set karo)
+}
 
-  // 7. Ab ek Dog ka object banate hain
-  let d = new Dog("Sheru");
+// Step 4: Inheritance set karo (Dog.prototype ko Animal.prototype se link karo)
+Dog.prototype = Object.create(Animal.prototype);
 
-  // 8. d.speak() call karne par Dog ka overridden speak method chalega
-  d.speak(); // Output: "Sheru barks"
+// Step 5: Dog.prototype ka constructor wapas Dog pe set karo
+Dog.prototype.constructor = Dog;
 
-  // 9. Prototype chain ko check karte hain:
-  //    d.__proto__ Dog.prototype ko point karega
-  console.log(d.__proto__ === Dog.prototype); // true
+// Step 6: Dog ke prototype pe apna method (override)
+Dog.prototype.speak = function () {
+  console.log(this.name + " barks");
+};
 
-  //    Dog.prototype ka prototype Animal.prototype hai (inheritance chain)
-  console.log(Dog.prototype.__proto__ === Animal.prototype); // true
+// Step 7: Use karo
+let d = new Dog("Sheru");
+d.speak(); // "Sheru barks"
 
-  //    Animal.prototype ka prototype Object.prototype hai (sab objects ka base)
-  console.log(Animal.prototype.__proto__ === Object.prototype); // true
+// Step 8: Prototype chain check karo
+console.log(d.__proto__ === Dog.prototype); // true
+console.log(Dog.prototype.__proto__ === Animal.prototype); // true
+console.log(Animal.prototype.__proto__ === Object.prototype); // true
 
-  // ===================== End of Detailed Explanation =====================
+// ===================== SUMMARY (Tameez se) =====================
+// - Prototype ek object hai jo har function/class ke sath hota hai.
+// - Usme methods/properties rakhoge to sab instances ko milenge (shared).
+// - Jab JS property/method nahi paata, to prototype chain follow karta hai.
+// - Inheritance me child ka prototype parent ke prototype se link hota hai.
+// - __proto__ se chain banti hai, aur Object.prototype pe chain khatam ho jati hai (null).
+
+// Agar ab bhi doubt hai, ek baar console.log se chain dekh lo, ya khud experiment karo!
