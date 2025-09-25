@@ -22,10 +22,10 @@ console.log(b); // 20
 let obj1 = { name: "Priyanshu" };
 let obj2 = obj1; // obj2 ko obj1 ka reference mil gaya
 
-obj2.name = "Vartika"; // obj2 se change kiya
+obj2.name = "xyz"; // obj2 se change kiya
 
-console.log(obj1.name); // "Vartika" (obj1 bhi change hogaya kyunki dono same reference share karte hain)
-console.log(obj2.name); // "Vartika"
+console.log(obj1.name); // "xyz" (obj1 bhi change hogaya kyunki dono same reference share karte hain)
+console.log(obj2.name); // "xyz"
 
 
 // --------------------- 3. Comparing Primitives vs Reference ---------------------

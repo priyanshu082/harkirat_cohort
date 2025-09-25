@@ -188,13 +188,8 @@ foo();
     13. How does the scope chain work?
         - When resolving a variable, JavaScript looks in the current scope, then the parent scope, and so on up to the global scope.
 
-    14. What is the global object in JavaScript?
-        - In browsers, it's 'window'; in Node.js, it's 'global'. Variables declared with var in the global scope become properties of the global object.
 
-    15. Can you access a variable declared inside a function from outside?
-        - No, unless you return it or expose it via closure.
-
-    16. What is the difference between execution context and lexical environment?
+    14. What is the difference between execution context and lexical environment?
         - Execution context is a concept that contains the lexical environment, variable environment, and 'this' binding. Lexical environment is part of the execution context.
 */
 
