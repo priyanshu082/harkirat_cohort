@@ -75,18 +75,6 @@ console.log(getSecret()); // "I'm a closure!"
    counter1() -> 2
    counter2() -> 1
 */
-function makeCounterQ2() {
-    let count = 0;
-    return function() {
-        count++;
-        return count;
-    }
-}
-const counter1 = makeCounterQ2();
-const counter2 = makeCounterQ2();
-console.log(counter1()); // 1
-console.log(counter1()); // 2
-console.log(counter2()); // 1
 
 /*
 3. How does caching with closures help performance? Give a real-world scenario.
