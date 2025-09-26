@@ -48,26 +48,3 @@ anotherPerson = null;
 // Now the object has no references → unreachable → eligible for garbage collection
 // JS engine will automatically clean it up at some point
 
-// ------------------------- Example 2: Circular References -------------------------
-
-let objA = {};
-let objB = {};
-
-objA.ref = objB;
-objB.ref = objA;
-
-// Removing root references
-objA = null;
-objB = null;
-
-// Even though objA and objB reference each other, they are now unreachable from roots
-// Mark-and-sweep garbage collector will free this memory
-// Reference counting alone would have failed here, causing a memory leak
-
-/*
-  Key Takeaways:
-  1. JS automatically handles memory cleanup.
-  2. Objects become eligible for GC when they are unreachable.
-  3. Circular references are handled safely by mark-and-sweep.
-  4. Developers should nullify unused references and avoid unnecessary globals to help GC.
-*/
